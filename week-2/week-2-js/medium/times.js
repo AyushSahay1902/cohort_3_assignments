@@ -9,5 +9,16 @@ There is no automated test for this one, this is more for you to understand time
 */
 
 function calculateTime(n) {
-    return 0.01;
+
+    const startTime = Date.now(); // Start time in milliseconds
+    let sum = 0;
+    for (let i = 1; i <= n; i++) {
+        sum += i;
+    }
+    const endTime = Date.now(); // End time in milliseconds
+    const totalTime = (endTime - startTime) / 1000; // Calculate total time taken in seconds
+    return totalTime; // Return total time in seconds
+
 }
+
+console.log(calculateTime(1000000000));
