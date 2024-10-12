@@ -1,24 +1,47 @@
-/*
- * Write 3 different functions that return promises that resolve after t1, t2, and t3 seconds respectively.
- * Write a function that sequentially calls all 3 of these functions in order.
- * Return a promise chain which return the time in milliseconds it takes to complete the entire operation.
- * Compare it with the results from 3-promise-all.js
- */
-
+// Function that returns a promise resolving after t1 seconds
 function wait1(t) {
-
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(`Waited for ${t} seconds`);
+        }, t * 1000); // Convert seconds to milliseconds
+    });
 }
 
+// Function that returns a promise resolving after t2 seconds
 function wait2(t) {
-
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(`Waited for ${t} seconds`);
+        }, t * 1000);
+    });
 }
 
+// Function that returns a promise resolving after t3 seconds
 function wait3(t) {
-
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(`Waited for ${t} seconds`);
+        }, t * 1000);
+    });
 }
 
-function calculateTime(t1, t2, t3) {
+// Function to calculate the total time taken to complete all three waits
+async function calculateTime(t1, t2, t3) {
+    const startTime = Date.now(); // Start time in milliseconds
 
+    // Call the wait functions sequentially
+    await wait1(t1);
+    await wait2(t2);
+    await wait3(t3);
+
+    const endTime = Date.now(); // End time in milliseconds
+    const totalTime = endTime - startTime; // Calculate total time taken
+
+    return totalTime; // Return total time in milliseconds
 }
+
+calculateTime(1, 2, 3).then((time) => {
+    console.log(`Total time elapsed: ${time} milliseconds`);
+}); // Call the function with t1 = 1, t2 = 2, t3 = 3
 
 module.exports = calculateTime;
